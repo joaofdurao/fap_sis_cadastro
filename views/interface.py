@@ -11,7 +11,7 @@ class MainView:
     def mudar_tela(self, tela):
         if self.tela_atual:
             os.system('clear')
-        self.tela_atual = tela
+        self.tela_atual = tela  
 
 class TelaInicial(MainView):
 
