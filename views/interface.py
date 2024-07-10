@@ -61,12 +61,14 @@ class CadastrarTarefa(MainView):
             
         def cadastro_tarefa(self):
             try:
-                TController().cadastrar_tarefa(self.titulo, self.descricao, self.status)
-                print('Tarefa cadastrada com sucesso!')
+                if TController().criar_tarefa(self.titulo, self.descricao, self.status):
+                    print('Tarefa cadastrada com sucesso!')
+                else:
+                    print('Erro ao cadastrar tarefa, tente novamente.')
                 time.sleep(5)
                 self.mudar_tela(TelaInicial())
-            except Exception:
-                print('Erro ao cadastrar tarefa, tente novamente.')
+            except Exception as e:
+                print('Erro ao cadastrar tarefa, tente novamente.', e)
                 time.sleep(5)
                 self.mudar_tela(TelaInicial())
 
@@ -78,7 +80,7 @@ class AlterarTarefa(MainView):
     
     def print_alterar_form(self):
         print('=== Alterar tarefa ===')
-        self.id = input('Digite o ID da tarefa que deseja alterar: ')
+        self.id = int(input('Digite o ID da tarefa que deseja alterar: '))
         self.titulo = input('Digite o novo título da tarefa: ')
         self.descricao = input('Digite a nova descrição da tarefa: ')
         self.status = input('Digite o novo status da tarefa: ')
@@ -89,8 +91,8 @@ class AlterarTarefa(MainView):
             print('Tarefa alterada com sucesso!')
             time.sleep(5)
             self.mudar_tela(TelaInicial())
-        except Exception:
-            print('Erro ao alterar tarefa, tente novamente.')
+        except Exception as e:
+            print('Erro ao alterar tarefa, tente novamente.', e)
             time.sleep(5)
             self.mudar_tela(TelaInicial())
 
@@ -102,7 +104,7 @@ class RemoverTarefa(MainView):
     
     def print_remover_form(self):
         print('=== Remover tarefa ===')
-        self.id = input('Digite o ID da tarefa que deseja remover: ')
+        self.id = int(input('Digite o ID da tarefa que deseja remover: '))
     
     def remover_tarefa(self):
         try:
@@ -110,8 +112,8 @@ class RemoverTarefa(MainView):
             print('Tarefa removida com sucesso!')
             time.sleep(5)
             self.mudar_tela(TelaInicial())
-        except Exception:
-            print('Erro ao remover tarefa, tente novamente.')
+        except Exception as e:
+            print('Erro ao remover tarefa, tente novamente.', e)
             time.sleep(5)
             self.mudar_tela(TelaInicial())
 
@@ -132,8 +134,8 @@ class ListarTarefas(MainView):
                     print('=========================')
                 time.sleep(5)
                 self.mudar_tela(TelaInicial())
-            except Exception:
-                print('Erro ao listar tarefas, tente novamente.')
+            except Exception as e:
+                print('Erro ao listar tarefas, tente novamente.', e)
                 time.sleep(5)
                 self.mudar_tela(TelaInicial())
 

@@ -4,9 +4,9 @@ import json
 from models.tarefa import Tarefa
 
 class TarefaRepository:
-    TAREFA_JSON = os.curdir + '\\repositories\\tarefa_repo.json'
+    TAREFA_JSON = os.curdir + '/repositories/tarefa_repo.json'
 
-    def create_tarefa(self, tarefa):    
+    def create_tarefa(self, tarefa):   
         new_tarefa = tarefa
         new_tarefa.id = self._generate_tarefa_id()
 
@@ -49,13 +49,15 @@ class TarefaRepository:
         try:
             with open(self.TAREFA_JSON, 'r') as arquivo:
                 tarefas = json.load(arquivo)
+                print('repoooo', tarefas)
                 tarefas_list = []
                 for tf in tarefas:
+                    print('tarefa', tf)
                     tarefas_list.append(Tarefa(tf['id'], 
                                                  tf['titulo'], 
                                                  tf['descricao'], 
                                                  tf['status']))
-                    return tarefas_list
+                return tarefas_list
 
         except json.decoder.JSONDecodeError:
             print('Arquivo JSON em branco.')
@@ -76,7 +78,7 @@ class TarefaRepository:
             with open(self.TAREFA_JSON, 'r+') as arquivo:
                 tarefas = json.load(arquivo)
                 for tf in tarefas:
-                    if tf['id'] == id:
+                    if tf['id'] == tarefa.id:
                         tf['titulo'] = updated_tarefa.titulo
                         tf['descricao'] = updated_tarefa.descricao
                         tf['status'] = updated_tarefa.status
